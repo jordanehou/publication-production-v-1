@@ -1,0 +1,155 @@
+{%extends 'bases.html'%}
+{%load static%}
+
+
+{%block content%}
+
+
+
+
+
+    <!-- Sidebar -->
+    <div style="float: right; width: 20%; margin-top: 30px; background-color: rgba(3, 27, 70, 0.95);color: white; margin-top: 120px;
+     border-top-left-radius: 5px; border-bottom-left-radius: 5px;"" >    
+        {%for mod in module.course.module.all %}           
+            <a href="{% url 'courses:modulelistdetail' slug=mod.slug course=mod.course subject=mod.subject %}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3" ></i><span>{{mod.position}}: {{mod.name}}</span>
+            </a>
+        {%endfor%}
+        {%if user.is_superuser%}
+            <button type="button" class="btn btn-primary " style="width: 100%; " >
+                <a  class="fas fa-tachometer-alt fa-fw me-3" href="{% url 'courses:modulecreate' subject=module.subject slug=module.course %}"style="text-decoration: none;color: white;">create Module</a>
+            </button>
+        {% endif %}
+        
+    </div>
+    <!-- Sidebar -->
+  
+    <!-- Navbar -->
+    
+    <!-- Navbar -->
+
+  
+  <!--Main Navigation-->
+  
+  <!--Main layout-->
+  <main style="  width: 70%; margin-left: 30px; margin-top: 70px; ">
+    <div class="container-fluid pt-3">
+        <h2 style="text-transform: uppercase;">title: {{module.name}}</h2>
+        <p>module {{module.position}} has been created by {{module.course.owner}} </p>
+        {%if module.video%}
+            <video  class="img-fluid" autoplay loop controls>
+                <source src="{{module.video.url}}" >
+                <p class="warning">Your browser does not support HTML5 video.</p>
+            </video>          
+        {%endif%}
+        <div style="margin-top: 15px; margin-bottom: 30px;">
+            {%if module.present_file%}
+                
+                    <a href="{{ module.present_file.url }}" type="button" class="btn btn-info mb-2" style="text-decoration: none; color: white;">Download presenting file</a>
+                
+            {%endif%}
+            {%if module.pdf_course%}
+                
+                    <a href="{{ module.pdf_course.url }}" type="button" class="btn btn-info mb-2" style="text-decoration: none; color: white;">Download pdf file</a>
+                
+            {%endif%}
+            {%if module.video%}
+                
+                    <a href="{{ module.video.url }}" type="button" class="btn btn-primary mb-2" style="text-decoration: none; color: white;">Download video</a>
+                
+                <br>
+            {%endif%}
+            {% if user.is_superuser%}
+                
+                <a href="{% url 'courses:moduleupdate' subject=module.subject.slug course=module.course.slug slug=module.slug %}" type="button" class="btn btn-primary mb-2" style="text-decoration: none; color: white;">modufied the module</a>
+            
+    
+    
+            
+                <a href="{% url 'courses:moduledelete' subject=module.subject.slug course=module.course.slug slug=module.slug %}" 
+                type="button" class="btn btn-danger mb-2"style="text-decoration: none; color: white;">delete the module</a></a>
+                
+            {%endif%}
+
+        </div>
+        
+        <div style="margin-bottom: 30px; padding: 15px;">
+            <h4>Post your comment here</h4>
+            <form method="post">
+                {%csrf_token%}
+                <div class="form-group">
+                    {{form.as_p}}
+                    <input type="submit" name="form" value="comment" class="btn btn-primary btn-sm">
+                </div>
+            </form>
+
+            {% for comment in module.comments.all %} 
+                <h5>
+                    {{comment.owner}} 
+                    <small>
+                         has been posted the {{comment.created}}
+                    </small>
+                </h5>
+                <p style="font-size: 15px; font-weight: bold;">{{comment.body}}</p>
+                
+
+                {%for resp in comment.responses.all%}
+                    <h6 style="color: indigo;"><i>
+                            {{resp.owner}} 
+                            <small>
+                                has been reply the {{resp.created}}
+                            </small>
+                        </i>
+                    </h6>
+                    <p style="color: dodgerblue;"><i><b>{{resp.body}}</b></i></p>
+                {%endfor%}
+
+                <form method="post">
+                    {%csrf_token%}
+                    <input type="hidden" name="comment_id" value="{{comment.id}}">
+                    {{form2.as_p}}
+                    <input type="submit" name="form2" value="Response" class="btn btn-warning btn-sm">
+                </form>
+            {%endfor%}
+
+        </div>
+
+
+        
+        
+        
+        
+        
+    </div>
+  </main>
+  <!--Main layout-->
+
+
+
+
+
+
+
+        
+
+
+
+
+
+        
+
+        
+            
+        
+           
+
+
+
+
+
+
+        
+
+   
+{%endblock%}

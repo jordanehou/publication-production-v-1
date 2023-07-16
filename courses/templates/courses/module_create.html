@@ -1,0 +1,17 @@
+{% extends 'bases.html' %}
+
+{%block content%} 
+    
+          <div class="container py-5" >
+        
+        <div style="margin: 0 auto; width: 400px; border: 2px solid rgba(3, 27, 70, 0.95);; border-radius: 5px;">
+              <h2 style="text-align: center; margin-bottom: 20px; border-bottom: 2px solid rgba(3, 27, 70, 0.95); color: rgba(3, 27, 70, 0.95);;">Create module</h2>
+            <form method="POST" style="margin: 20px; margin-bottom: 20px;">
+                {% csrf_token %} 
+                {{ form.as_p}} 
+                <input type="submit" value="confirmer la creation" > 
+            </form>
+        </div>
+    </div>
+
+{% endblock%}

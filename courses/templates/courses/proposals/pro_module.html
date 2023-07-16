@@ -1,0 +1,24 @@
+{%extends 'bases.html'%}
+{% block content %}
+<div class="container py-5" >
+    <div style="margin: 0 auto; width: 600px;">
+    
+        <h2>Proposal module</h2>
+        <h2>Register</h2> <br>   
+        <form method="POST" action="">
+            {%csrf_token %}
+            {{ form.as_p }}
+            
+            
+            <button type="submit" class="btn btn-primary mb-2">
+                Send
+            </button>
+        </form>
+    
+    
+    </div>
+
+
+</div>
+    
+{% endblock %}

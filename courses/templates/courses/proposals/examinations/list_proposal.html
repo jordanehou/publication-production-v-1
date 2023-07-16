@@ -1,0 +1,6 @@
+{%extends 'bases.html'%}
+{%block content%}
+    {%for p in proposals%}
+        <p>sujet: {{p.name}}; description :{{p.description}}; owner {{p.owner}};   created{{p.created}} send by {{request.user.username}}</p>
+    {%endfor%}
+{%endblock%}

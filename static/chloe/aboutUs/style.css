@@ -1,0 +1,166 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+body
+{
+    font-family: sans-serif;
+    background-color: #f2f2f2;
+}
+#nav-bar
+{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.navbar
+{
+    background-image:linear-gradient(to right, #e7c942fa,blue) ;
+   
+}
+}
+.navbar-brand img
+{
+   height: 40px; 
+   padding-left: 20px;
+}
+.navbar-nav
+{
+    padding: 10 10 10 10px;
+}
+.navbar-nav
+{
+    color: #fff !important;
+    font-weight: 600;
+    padding 0 0 50px 25px ;
+}
+}
+.fa-bars
+{
+    color: #fff;
+    font-size: 30px !important;
+}
+/*---------------ABOUT-US SECTION--------*/
+#about-us
+{
+    background:#f8f9a;
+    padding-bottom: 10px;
+    padding-top: 30px;
+    padding-left: 30px;
+    
+}
+
+.heading
+{
+width: 90%;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+text-align: center;
+margin: 20px auto;
+
+}
+
+.heading h1
+{
+    font-size: 50px;
+    color: #000;
+    margin-bottom: 25px;
+    position: relative;
+}
+.heading h1::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    display: block;
+    margin: 0 auto;
+    background-color: blue;
+
+}
+.heading p{
+font-size: 18px;
+color: #666;
+margin-bottom: 35px;
+}
+.container{
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px 20px;
+}
+.about{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+ }
+ .about-image{
+    flex: 1;
+    margin-right: 40px;
+    overflow: hidden;
+}
+
+.about-image img{
+    max-width: 100%;
+    height:auto;
+    display: block;
+    transition: 0.5s ease;
+}
+.about-image:hover img{
+    transform: scale(1.2);
+}
+.about-content{
+    flex: 1;
+}
+
+.about-content h2{
+    font-size: 23px;
+    margin-bottom: 15px;
+    color: #666;
+}
+.about-content .contact-us{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: blue;
+    color: #fff;
+    font-size: 19px;
+    text-decoration: none;
+    border-radius: 0.3s ease;
+
+}
+.about-content .contact-us:hover{
+    background-color: #3e5e8e;
+}
+@media screen and (max-width: 768px){
+    .heading{
+        padding: 0px 20px;
+    }
+    .heading h1{
+        font-size: 36px;
+    }
+    .heading p{
+        font-size: 17px;
+        margin-bottom: 0px;
+    }
+    .container{
+        padding: 0px;
+    }
+    .about{
+        padding: 20px;
+        flex-direction: column;
+    }
+    .about-image{
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+    .about-content p{
+        padding: 0px;
+        font-size: 16px;
+    }
+    .about-content .contact-us{
+        font-size: 16px;
+    }
+}

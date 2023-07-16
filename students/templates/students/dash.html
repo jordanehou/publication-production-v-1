@@ -1,0 +1,9 @@
+{%extends 'bases.html'%}
+
+{%block content%}
+{{order.first_name}}
+    {%for c in order.items.all%}
+    
+    <a href="{% url 'courses:modulelist' slug=c.course.slug subject=c.course.subject.slug %}">{{c.course}}</a>
+    {%endfor%}
+{%endblock%}

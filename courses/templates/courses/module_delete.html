@@ -1,0 +1,20 @@
+{% extends 'bases.html' %}
+
+{%block content%}
+<div class="container py-5" style="margin-bottom: 130px;" >
+        
+    <div style="margin: 0 auto; width: 800px; "> 
+    <h1 style="margin-bottom: 20px;">Are you sure about the deletion of this module </h1>
+    <form method="POST">
+        {% csrf_token %} 
+        
+        <button type="submit" class="btn btn-danger mb-2">
+            confirm delation
+        </button>
+        <a href="{% url 'courses:modulelistdetail' slug=module.slug course=module.course.slug subject=module.subject.slug %}"
+         style="color: indigo;"><u>cancel delation</u></a>
+    </form>
+    </div>
+</div>
+
+{% endblock%}
