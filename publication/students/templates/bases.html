@@ -1,0 +1,245 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css2.css' %}"> 
+    
+
+    <link rel="stylesheet" href="{% static 'chloe/css_ch/bootstrap.min.css' %}">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'chloe/css_ch/style.css' %}">
+    <link rel="stylesheet" href="{% static 'chloe/css_ch/lightbox.css' %}">
+    <title>Publisher</title>
+</head>
+
+
+<body style="background-color: rgb(248, 249, 252);">
+
+  <!--header-->
+ 
+  <header  style="background-color: rgba(3, 27, 70, 0.95); color: white;">
+  
+    <div class="row" style=" background-color: rgba(3, 27, 70, 0.95); ">
+        <div class="col-md-12" >
+            <!--NAV BARE-->
+            <nav class="navbar navbar-expand-lg  " style="color: white; margin-left: 10px; margin-right: 10px; ">
+                
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav" >
+                  <a class="navbar-brand" href="{%url 'welcome'%}" style="font-weight: bold; font-size: 20px; color: white; font-weight: bold; text-transform: capitalize; margin-right: 300px;">
+                    <em style="color: #b21972;">E-</em><span style="color: rgb(18, 133, 161);"></span>CONTENT
+                  </a>
+                  <ul class="navbar-nav">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{%url 'welcome'%}" style="color: white; font-weight: bold; text-transform: capitalize;">Home <span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#" style="color: white; font-weight: bold; text-transform: capitalize;">About us</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#" style="color: white; font-weight: bold; text-transform: capitalize;">Contact</a>
+                    </li>
+
+                    
+                    
+                    <li class="nav-item">
+                     <a class="nav-link" href="{% url 'courses:subjectlist' %}" style="color: white; font-weight: bold; text-transform: capitalize;">Subjects</a>
+                    </li>
+                  </ul>
+                </div>
+
+
+
+                <div class="d-flex align-items-center">
+                  {%if request.user.is_authenticated%}
+                                                           
+                    <div class="dropdown" style="margin-right: 15px;">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" id="deroulanta" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none;">{{request.user.username}} </a>
+                      <div class="dropdown-menu" aria-labelledby="deroulanta">
+                        <a class="dropdown-item" href="{% url 'logouts' %}" >Logout</a>
+                        <a class="dropdown-item" href="{% url 'payment:done'%}" >Das</a>
+                      </div>
+                      
+                    </div>
+                    <div class="cart" style="color: white;">
+                      {% with total_items=cart|length %}
+                        {% if total_items > 0 %}
+                          Your cart:
+                          <a href="{% url 'cart:cart_detail' %}">
+                            {{ total_items }} item{{ total_items|pluralize }},
+                            ${{ cart.get_total_price }}
+                          </a>
+                        {% else %}
+                          Your cart is empty.
+                        {% endif %}
+                      {% endwith %}
+                    </div>
+            
+                  {%else%}
+                    <button type="button" class="btn btn-link px-3 me-2">
+                      <a href="{% url 'login' %}" >Login</a>
+                    </button>
+                    
+                    <a href="{% url 'register' %}" type="button" class="btn btn-primary me-3" style="text-decoration: none; color: white;">Register</a>
+                    
+                  {%endif%}
+                  <!-- Icon -->
+                  
+            
+                  <!-- Notifications -->
+                  
+                  <!-- Avatar -->
+                 
+                </div>
+
+            </nav>              
+            <!--End navbar-->
+        </div>
+    </div>
+
+    
+</div>
+  </header>
+
+
+  
+    
+
+
+    
+
+
+
+    {% block content %}
+            
+    {% endblock %}
+
+  
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+
+
+
+
+
+
+
+<footer class="text-center text-lg-start text-white" style="background-color: rgba(3, 27, 70, 0.95);;" >
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!--Grid row-->
+    <div class="row mt-4">
+      <!--Grid column-->
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">See other books</h5>
+
+        <ul class="list-unstyled mb-0">
+          <li>
+            <a href="#!" class="text-white"><i class="fas fa-book fa-fw fa-sm me-2"></i>Bestsellers</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white"><i class="fas fa-book fa-fw fa-sm me-2"></i>All books</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white"><i class="fas fa-user-edit fa-fw fa-sm me-2"></i>Our authors</a>
+          </li>
+        </ul>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Execution of the contract</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!" class="text-white"><i class="fas fa-shipping-fast fa-fw fa-sm me-2"></i>Supply</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white"><i class="fas fa-backspace fa-fw fa-sm me-2"></i>Returns</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white"><i class="far fa-file-alt fa-fw fa-sm me-2"></i>Regulations</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white"><i class="far fa-file-alt fa-fw fa-sm me-2"></i>Privacy policy</a>
+          </li>
+        </ul>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Publishing house</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!" class="text-white">The BookStore</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white">123 Street</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white">05765 NY</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white"><i class="fas fa-briefcase fa-fw fa-sm me-2"></i>Send us a book</a>
+          </li>
+        </ul>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Write to us</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!" class="text-white"><i class="fas fa-at fa-fw fa-sm me-2"></i>Help in purchasing</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white"><i class="fas fa-shipping-fast fa-fw fa-sm me-2"></i>Check the order status</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white"><i class="fas fa-envelope fa-fw fa-sm me-2"></i>Join the newsletter</a>
+          </li>
+        </ul>
+      </div>
+      <!--Grid column-->
+    </div>
+    <!--Grid row-->
+  </div>
+  <!-- Grid container -5555555555554444 -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    © 2023 Copyright:
+    <a class="text-white" href="https://mdbootstrap.com/">E-Content</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+
+
+</html>
+
+
+<!-- Remove the container if you want to extend the Footer to full width. -->
+
+
+ 
+
+
+<!-- End of .container -->

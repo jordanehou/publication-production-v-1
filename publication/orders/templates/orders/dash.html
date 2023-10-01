@@ -1,0 +1,18 @@
+{%extends 'bases.html'%}
+
+{%block content%}
+{{order.first_name}}mmmmm
+    {%for c in orders%}
+    {{c.order.items.course}}; 
+    {{c.course}} <br>
+    
+    
+    {%endfor%}
+
+    {%for c in orders.items.all%}
+    {{c.order}}
+    {{c.course}} <br>
+    
+    
+    {%endfor%}
+{%endblock%}

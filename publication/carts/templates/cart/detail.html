@@ -1,0 +1,74 @@
+{% extends 'bases.html' %}
+{% load static %}
+
+{%block content%}
+<div style=" margin: 0 auto; width: 900px; margin-bottom: 175px;">
+
+
+    <h1 style="margin-top: 60px;">Your shopping cart</h1>
+    <div style="margin: 0px; margin-top: 25px;">
+    <table class="cart" style="text-align: center; border: 2px solid black;">
+        <thead style="border: 2px solid;">
+            <tr style="border: 2px solid black;">
+                <th style="border: 2px solid; margin: 10px auto; padding: 10px;">Image</th>
+                <th style="border: 2px solid; margin: 10px auto; padding: 10px;">Course</th>
+                <th style="border: 2px solid; margin: 10px auto; padding: 10px;">Price</th>
+                <th style="border: 2px solid; margin: 10px auto; padding: 10px; border-right: none;">Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+                {% with course=item.course %}
+                    <tr style="padding: 10px; border: 2px solid black;">
+                        <td style="border: 2px solid; margin: 10px auto; padding: 10px;">
+                            <a href="{{ course.get_absolute_url }}">
+                                <img src="{% if course.image %}{{ course.image.url}}
+                                        {% else %}{% static 'img/no_image.jpg' %}{% endif %}" style="width: 75px; height: 75px;">
+                            </a>
+                        </td>
+                        <td style="border: 2px solid; margin: 10px auto; padding: 10px;">{{ course.name }}</td>
+                        <td>{{ item.price }}</td>
+
+                        <td style="border: 2px solid black; margin: 10px auto; padding: 10px;  border-right: none;">
+                            <form action="{% url 'cart:cart_remove' course.id %}" method="post">
+                                <input type="submit" value="Remove">
+                                {% csrf_token %}
+                            </form>
+                        </td>
+                        
+                    </tr>
+                    
+                {% endwith %}
+            {% endfor %}
+            <tr class="total" style="padding: 10px; border: 2px solid black;">
+                <td style="padding: 10px; border: 1px solid black; border-right: none;">Total</td>
+                <td colspan="4"></td>
+                <td class="num" style="padding: 10px; border: 1px solid black;border-left: none;">${{ cart.get_total_price }} </td>
+            </tr>
+            <tr class="total" style="padding: 10px; border: 2px solid black;">
+                <td colspan="3">
+                    
+                        <a href="/" class="button light" style="text-decoration: none; color: rgba(3, 27, 70, 0.95)">Continue shopping</a>
+                        
+                
+                </td>
+                    <td >
+                        <a href="{% url 'orders:order_create' %}" class="button" style="color: rgba(3, 27, 70, 0.95);">Checkout</a>
+                     </td>
+                
+                
+               
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    
+
+</div>
+
+
+
+
+
+
+{%endblock%}

@@ -1,0 +1,122 @@
+{% extends 'bases.html' %}
+{%load static%}
+
+{%block content %} 
+
+    <!-- Sidebar -->
+    <div style="float: right; width: 20%; margin-top: 80px; background-color: rgba(3, 27, 70, 0.95);color: white;
+    border-top-left-radius: 5px; border-bottom-left-radius: 5px;" >    
+        {%if user.is_superuser%}
+            <a href="{% url 'courses:coursepro'%}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3" ></i><span>Propose course</span>
+            </a>
+            <a href="{% url 'courses:listcourpro'%}"  class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3" ></i><span>see Propose course</span>
+            </a>
+        {% endif %}
+        
+    </div>
+    <!-- Sidebar -->
+
+    <div class="container" style="margin-top: 40px;">
+        <link rel="stylesheet" href="{% static 'css1.css' %}"> 
+        <h2 style="text-align: center;">Select Course</h2>
+        <div class="row" >
+            {%for mod in subject.course.module.all%}
+                <a href="{%url 'courses:moduledetail' slug=mod.slug course=mod.course subject=mod.subject%}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Module {{mod.}} {{mod.title}}</span>
+                </a>
+            {%endfor%}
+            {%for course in subject.course.all%}
+                <div class="col-md-4 " style="margin-top: 30px; margin-bottom: 50px;">
+                    
+                    
+                        <div class="card cardre" style="border: 1px solid rgba(3, 27, 70, 0.95); height: 430px; background-color: rgb(248, 249, 252);
+                         border-top-left-radius: 5px; border-top-right-radius: 5px;">
+                            <a href="">
+                                {%if course.image%}
+                                    <img class="card-img-top subImg" src="{{course.image.url}}" alt="Lights" style="width:100%; height: 150px;">
+                                {%else%}
+                                    <img src="{%static 'chloe/imgs/default_sub.png' %}" class="card-img-top" style="width:100%; height: 150px;" alt="...">
+                                {%endif%}
+
+                                <div class="title" style="width: 100%; color: #000000; background: rgba(3, 27, 70, 0.95); text-transform: uppercase; padding: 5px; text-align: center;">
+                                    <h5 class="subTitle" style="color: #000000;">
+                                        <a href="" style="text-decoration: none; color: white;">{{course.name}}</a>
+                                    </h5>
+                                </div>
+                                <div class="card-body" >
+                                    <p class="card-text" style="text-align: right;">
+                                        <small class="text-muted">
+                                            {%if course.price <= 0%}
+                                                Free course
+                                            {%else%}
+                                                Buy ${{course.price}}
+                                            {%endif%}
+                                        </small>
+                                    </p>
+                                    <a href="" style="text-decoration: none;">
+                                        <h5 class="card-title" style="color: #212529;">{{course.name}} </h5>
+                                    </a>
+
+                                    
+                                    {{ course.description|linebreaks }}
+
+                                    {%if course.price > 0%}
+                                        Price: ${{course.price}}
+                                    {%endif%}
+                                </div>
+                            </a>
+
+                            {%if course.price <= 0%}
+                               
+                                    <a href="{% url 'courses:modulelist' slug=course.slug subject=subject.slug %}" type="button" class="btn btn-primary me-3" style="text-decoration: none; color: white; width: 100%;">Follow this course</a>
+                                
+                            {%else%}
+                                <form action="{% url 'cart:cart_add' course.id %}" method="post">
+                                    {{ cart_product_form }}
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary"  style="width: 100%; margin-bottom: 0;">
+                                        Add to cart
+                                    </button>
+                                </form>
+                            {%endif%}
+                            
+                            
+                        </div>
+                        
+                          
+                </div>
+            {%empty%}
+                <div class="col-md-12" style="margin-bottom: 150px;">
+                    <h1>No course in this subject</h1><br>
+                    
+                    <p>please we are updating  this subject for the moment </p> 
+
+                    <p> are so sorry for that </p> 
+
+                    <p>You can select another subject by clicking on the link below </p>
+
+                    <a href="{% url 'courses:subjectlist' %}">Subject</a>
+               
+                </div>
+            
+                
+
+            {%endfor%}
+    
+    
+    
+          
+        </div>
+    
+        
+    
+    
+        
+    </div>
+
+
+
+
+{% endblock%}

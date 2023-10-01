@@ -1,0 +1,30 @@
+{%extends 'bases.html'%}
+
+{% block content %}
+    <div class="container py-3" style="margin-bottom: 80px; margin-top: 60px;">
+        <h2 style="text-align: center; margin-bottom: 20px;">Login into your account</h2>
+        <div style="margin: 0 auto; width: 400px; border: 2px solid black; border-radius: 5px;">
+            
+            <div >
+                <form action="" method="POST" style="margin: 20px; margin-bottom: 20px;">
+                    {%csrf_token %}
+                    <label for="username" style="margin-bottom: 10px;">User name</label>
+                    <input class="form-control" type="text" id="username" name="username" style="margin-bottom: 10px;">
+                    <label for="password" style="margin-bottom: 10px;">Password</label>
+                    <input class="form-control" type="password" id="password" name="password" style="margin-bottom: 15px;">
+                    <button type="submit" class="btn btn-primary mb-2" style="margin-bottom: 25px; width: 100%;">
+                        Log-in
+                    </button>
+                    
+                   <p style="margin-top: 15px; ">
+                    register by clicking here <a href="{% url 'register' %} " style="text-decoration: none; color: mediumblue">Log-UP</a>
+                   </p>
+                </form>
+            </div>
+            
+        </div>
+
+    </div>
+    
+    
+{% endblock %}

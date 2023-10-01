@@ -1,0 +1,16 @@
+{% extends "bases.html" %}
+{% block title %}Payment successful{% endblock %}
+{% block content %}
+<div class="container py-5" style="margin-bottom: 130px;" >
+        
+    <div style="margin: 0 auto; width: 800px; "> 
+  
+    <h1>Your payment was successful</h1>
+    <p>Your payment has been processed successfully.</p>
+    {%for c in order.items.all%}
+        
+       <p style="font-size: 15px;">start your course now <a href="{% url 'courses:modulelist' slug=c.course.slug subject=c.course.subject.slug %}"><u style="font-weight: bold;"> {{c.course}}</u></a></p>
+    {%endfor%}
+    </div>
+</div>
+{% endblock %}

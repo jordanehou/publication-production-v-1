@@ -1,0 +1,7 @@
+{%extends 'bases.html'%}
+{%block content%}
+    {%for p in proposals%}
+        <p>{{p.subject}}; {{p.course}}; {{p.name}}; {{p.video}}; {{p.present_file}} ;{{p.pdf_course}} ;{{p.description}}; {{p.price}}
+            {{p.position}} ;{{p.owner}} {{p.created}} send by {{request.user.username}}</p>
+    {%endfor%}
+{%endblock%}

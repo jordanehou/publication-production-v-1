@@ -1,0 +1,13 @@
+{%extends 'bases.html'%}
+{%block content%}
+<div class="container py-5" style="margin-bottom: 200px;" >
+    <div style="margin: 0 auto; width: 900px;">
+        
+         <h2 style="text-align: center; margin-bottom: 20px; border-bottom: 2px solid rgba(3, 27, 70, 0.95); color: rgba(3, 27, 70, 0.95);;">propose course</h2>
+       
+    {%for p in proposals%}
+        <p> <u><b>subject:</b></u> {{p.subject}}; <u><b>name:</b></u> {{p.name}}; <u><b>description:</b></u> {{p.description}}; <u><b>price:</b></u>  {{p.price}}; <u><b>owner:</b></u> {{p.owner}}; created the <i>{{p.created}}</i>, send by <i>{{request.user.username}}</i></p>
+    {%endfor%}
+    </div>
+</div>
+{%endblock%}
